@@ -4,6 +4,32 @@
   </ion-navbar>
 </ion-header>
 
-<ion-content padding>
+<ion-content padding class="form-control">
+
+  <form [formGroup]="petForm" class="form" (ngSubmit)="onSubmit(petForm.value)" >
+
+   <ion-item>
+     <ion-label floating color="primary" >Animal</ion-label>
+     <ion-input type="text" formControlName="animal"></ion-input>
+   </ion-item>
+   <div *ngIf="formErrors.animal">
+     <div *ngFor="let errors of formErrors.animal" >
+       <p class="alert">{{ errors }}<p>
+     </div>
+   </div>
+
+   <ion-item>
+     <ion-label floating color="primary" >Name</ion-label>
+     <ion-input type="text" formControlName="name"></ion-input>
+   </ion-item>
+   <div *ngIf="formErrors.name">
+     <div *ngFor="let errors of formErrors.name" >
+       <p class="alert">{{ errors }}<p>
+     </div>
+   </div>
+
+   <button ion-button full type="submit" [disabled]="!petForm.valid">Submit</button>
+
+ </form>
 
 </ion-content>

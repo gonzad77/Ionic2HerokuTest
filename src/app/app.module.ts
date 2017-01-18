@@ -5,6 +5,10 @@ import { HomePage } from '../pages/home/home';
 import { AssignPage } from '../pages/assign/assign';
 import { PetPage } from '../pages/pet/pet';
 import { PersonPage } from '../pages/person/person';
+import { DeletePersonPage } from '../pages/deletePerson/deletePerson';
+import { DeletePetPage } from '../pages/deletePet/deletePet';
+import { UpdatePetPage } from '../pages/updatePet/updatePet';
+import { UpdatePersonPage } from '../pages/updatePerson/updatePerson';
 
 @NgModule({
   declarations: [
@@ -12,7 +16,11 @@ import { PersonPage } from '../pages/person/person';
     HomePage,
     PersonPage,
     PetPage,
-    AssignPage
+    AssignPage,
+    DeletePetPage,
+    DeletePersonPage,
+    UpdatePetPage,
+    UpdatePersonPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -23,7 +31,11 @@ import { PersonPage } from '../pages/person/person';
     HomePage,
     PersonPage,
     PetPage,
-    AssignPage
+    AssignPage,
+    DeletePetPage,
+    DeletePersonPage,
+    UpdatePetPage,
+    UpdatePersonPage
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
 })
