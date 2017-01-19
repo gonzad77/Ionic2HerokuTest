@@ -5,4 +5,20 @@
 </ion-header>
 
 <ion-content padding>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col width-33>name</ion-col>
+      <ion-col width-33>surname</ion-col>
+      <ion-col width-33>action</ion-col>
+    </ion-row>
+    <ion-row *ngFor="let person of people">
+      <ion-col width-33>{{person.name}}</ion-col>
+      <ion-col width-33>{{person.surname}}</ion-col>
+      <ion-col width-33>
+        <a (click)="update(person.id)">update</a>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
 </ion-content>

@@ -10,7 +10,22 @@ import { Headers, RequestOptions, Http } from '@angular/http';
 
 export class UpdatePetPage {
 
+  pets: any;
+
   constructor(public navCtrl: NavController, public http: Http) {
 
+  }
+
+  ionViewWillLoad() {
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let options = new RequestOptions({ headers: headers });
+    return this.http
+    .get('http://localhost:3000/api/Pets', options)
+    .toPromise()
+    .then(res => this.pets = res.json())
+  }
+
+  update(petId){
+    console.log(petId);
   }
 }
