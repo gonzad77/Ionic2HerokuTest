@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import 'rxjs/add/operator/toPromise';
 import { Headers, RequestOptions, Http } from '@angular/http';
+import { EditPetPage } from '../editPet/editPet';
 
 @Component({
   selector: 'page-updatePet',
@@ -26,6 +27,6 @@ export class UpdatePetPage {
   }
 
   update(petId){
-    console.log(petId);
+    this.navCtrl.push(EditPetPage,{id: petId});
   }
 }

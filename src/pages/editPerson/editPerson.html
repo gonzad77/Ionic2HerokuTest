@@ -1,0 +1,50 @@
+<ion-header>
+  <ion-navbar>
+    <ion-title>Edit Person</ion-title>
+  </ion-navbar>
+</ion-header>
+
+<ion-content padding class="form-control">
+
+  <form [formGroup]="personForm" class="form" (ngSubmit)="onSubmit(personForm.value)" >
+
+   <ion-item>
+     <ion-label floating color="primary" >Name</ion-label>
+     <ion-input type="text" formControlName="name"></ion-input>
+   </ion-item>
+   <div *ngIf="formErrors.name">
+     <div *ngFor="let errors of formErrors.name" >
+       <p class="alert">{{ errors }}<p>
+     </div>
+   </div>
+
+   <ion-item>
+     <ion-label floating color="primary" >Last Name</ion-label>
+     <ion-input type="text" formControlName="lastname"></ion-input>
+   </ion-item>
+   <div *ngIf="formErrors.lastname">
+     <div *ngFor="let errors of formErrors.lastname" >
+       <p class="alert">{{ errors }}<p>
+     </div>
+   </div>
+
+   <ion-item>
+     <ion-label floating color="primary" >Age</ion-label>
+     <ion-input type="number" formControlName="age"></ion-input>
+   </ion-item>
+   <div *ngIf="formErrors.age">
+     <div *ngFor="let errors of formErrors.age" >
+       <p class="alert">{{ errors }}<p>
+     </div>
+   </div>
+
+   <ion-item class="term">
+     <ion-label class="terms-checkbox-label">Be able to adopt a pet</ion-label>
+     <ion-checkbox color="primary" formControlName="able"></ion-checkbox>
+   </ion-item>
+
+   <button ion-button full type="submit" [disabled]="!personForm.valid">Update</button>
+
+ </form>
+
+</ion-content>

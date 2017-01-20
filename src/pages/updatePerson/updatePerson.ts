@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import 'rxjs/add/operator/toPromise';
 import { Headers, RequestOptions, Http } from '@angular/http';
+import { EditPersonPage } from '../editPerson/editPerson';
 
 @Component({
   selector: 'page-updatePerson',
@@ -26,6 +27,6 @@ export class UpdatePersonPage {
   }
 
   update(personId){
-    console.log(personId);
+    this.navCtrl.push(EditPersonPage,{id: personId});
   }
 }

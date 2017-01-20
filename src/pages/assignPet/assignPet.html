@@ -1,22 +1,24 @@
 <ion-header>
   <ion-navbar>
-    <ion-title>Assign</ion-title>
+    <ion-title>Assign Pet</ion-title>
   </ion-navbar>
 </ion-header>
 
 <ion-content padding>
+
   <ion-grid>
     <ion-row>
+      <ion-col width-33>animal</ion-col>
       <ion-col width-33>name</ion-col>
-      <ion-col width-33>surname</ion-col>
       <ion-col width-33>action</ion-col>
     </ion-row>
-    <ion-row *ngFor="let person of people">
-      <ion-col width-33>{{person.name}}</ion-col>
-      <ion-col width-33>{{person.surname}}</ion-col>
+    <ion-row *ngFor="let pet of pets">
+      <ion-col width-33>{{pet.animal}}</ion-col>
+      <ion-col width-33>{{pet.name}}</ion-col>
       <ion-col width-33>
-        <a (click)="assign(person.id)">assign pet</a>
+        <a (click)="assign(pet.id)">assign</a>
       </ion-col>
     </ion-row>
   </ion-grid>
+
 </ion-content>

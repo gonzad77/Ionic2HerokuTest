@@ -9,6 +9,11 @@ import { DeletePersonPage } from '../pages/deletePerson/deletePerson';
 import { DeletePetPage } from '../pages/deletePet/deletePet';
 import { UpdatePetPage } from '../pages/updatePet/updatePet';
 import { UpdatePersonPage } from '../pages/updatePerson/updatePerson';
+import { EditPetPage } from '../pages/editPet/editPet';
+import { EditPersonPage } from '../pages/editPerson/editPerson';
+import { AssignPetPage } from '../pages/assignPet/assignPet';
+
+
 
 @NgModule({
   declarations: [
@@ -20,7 +25,10 @@ import { UpdatePersonPage } from '../pages/updatePerson/updatePerson';
     DeletePetPage,
     DeletePersonPage,
     UpdatePetPage,
-    UpdatePersonPage
+    UpdatePersonPage,
+    EditPetPage,
+    EditPersonPage,
+    AssignPetPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -35,7 +43,10 @@ import { UpdatePersonPage } from '../pages/updatePerson/updatePerson';
     DeletePetPage,
     DeletePersonPage,
     UpdatePetPage,
-    UpdatePersonPage
+    UpdatePersonPage,
+    EditPetPage,
+    EditPersonPage,
+    AssignPetPage
   ],
   providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
 })
