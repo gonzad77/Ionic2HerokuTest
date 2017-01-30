@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavParams } from 'ionic-angular';
 import 'rxjs/add/operator/toPromise';
 import { Headers, RequestOptions, Http } from '@angular/http';
 
@@ -20,7 +20,7 @@ export class AssignPetPage {
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
     return this.http
-    .get('http://localhost:3000/api/Pets?filter={"where":{"ownerId":""}}', options)
+    .get('http://localhost:3000/api/Pets?filter={"where": {"or":[{"ownerId":{"exists": false}},{"ownerId":null}]}}', options)
     .toPromise()
     .then(res => this.pets = res.json())
   }

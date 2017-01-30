@@ -12,6 +12,10 @@ import { UpdatePersonPage } from '../pages/updatePerson/updatePerson';
 import { EditPetPage } from '../pages/editPet/editPet';
 import { EditPersonPage } from '../pages/editPerson/editPerson';
 import { AssignPetPage } from '../pages/assignPet/assignPet';
+import { PersonService } from '../pages/services/person.service';
+import { PetService } from '../pages/services/pet.service';
+
+
 
 
 
@@ -48,6 +52,6 @@ import { AssignPetPage } from '../pages/assignPet/assignPet';
     EditPersonPage,
     AssignPetPage
   ],
-  providers: [{provide: ErrorHandler, useClass: IonicErrorHandler}]
+  providers: [PetService, PersonService]
 })
 export class AppModule {}

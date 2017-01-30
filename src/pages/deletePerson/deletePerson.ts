@@ -30,6 +30,7 @@ export class DeletePersonPage {
   }
 
   delete(personId){
+    this.updatePets(personId);
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
     return this.http
@@ -38,4 +39,28 @@ export class DeletePersonPage {
     .then(res => this.getPeople())
   }
 
+  updatePets(personId){
+    let id = "" + personId + "";
+    let headers = new Headers({ 'Content-Type': 'application/json' });
+    let options = new RequestOptions({ headers: headers });
+    return this.http
+    .get('http://localhost:3000/api/Pets?filter={"where":{"ownerId":"' + id + '"}}',options)
+    .toPromise()
+    .then(res => this.updatePet(res.json()))
+  }
+
+  updatePet(pets){
+    if(pets.length > 0)
+      for(let i = 0; i < pets.length; i++){
+        let headers = new Headers({ 'Content-Type': 'application/json' });
+        let options = new RequestOptions({ headers: headers });
+        return this.http
+        .put('http://localhost:3000/api/Pets/' + pets[i].id ,
+        {
+          ownerId: null
+        },options)
+        .toPromise()
+        .then(res => this.updatePet(res.json()))
+      }
+    }
 }
