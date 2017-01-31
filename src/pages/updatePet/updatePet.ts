@@ -1,8 +1,9 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import 'rxjs/add/operator/toPromise';
-import { Headers, RequestOptions, Http } from '@angular/http';
 import { EditPetPage } from '../editPet/editPet';
+import { PetService } from "../services/pet.service";
+
 
 @Component({
   selector: 'page-updatePet',
@@ -13,20 +14,16 @@ export class UpdatePetPage {
 
   pets: any;
 
-  constructor(public navCtrl: NavController, public http: Http) {
+  constructor(public navCtrl: NavController, public petService: PetService) {
 
   }
 
   ionViewWillLoad() {
-    let headers = new Headers({ 'Content-Type': 'application/json' });
-    let options = new RequestOptions({ headers: headers });
-    return this.http
-    .get('http://localhost:3000/api/Pets', options)
-    .toPromise()
+    this.petService.getPets()
     .then(res => this.pets = res.json())
   }
 
-  update(petId){
-    this.navCtrl.push(EditPetPage,{id: petId});
+  update(pet){
+    this.navCtrl.push(EditPetPage,{pet: pet});
   }
 }

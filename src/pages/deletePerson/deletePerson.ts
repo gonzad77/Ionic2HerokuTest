@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import 'rxjs/add/operator/toPromise';
-import { Headers, RequestOptions, Http } from '@angular/http';
+import { PersonService } from "../services/person.service";
+import { PetService } from "../services/pet.service";
 
 @Component({
   selector: 'page-deletePerson',
@@ -12,16 +12,15 @@ export class DeletePersonPage {
 
   people: any;
 
-  constructor(public navCtrl: NavController, public http: Http) {
+  constructor(
+    public navCtrl: NavController,
+    public personService: PersonService,
+    public petService: PetService) {
 
   }
 
   getPeople(){
-    let headers = new Headers({ 'Content-Type': 'application/json' });
-    let options = new RequestOptions({ headers: headers });
-    return this.http
-    .get('http://localhost:3000/api/People', options)
-    .toPromise()
+    this.personService.getPeople()
     .then(res => this.people = res.json())
   }
 
@@ -31,36 +30,17 @@ export class DeletePersonPage {
 
   delete(personId){
     this.updatePets(personId);
-    let headers = new Headers({ 'Content-Type': 'application/json' });
-    let options = new RequestOptions({ headers: headers });
-    return this.http
-    .delete('http://localhost:3000/api/People/' + personId, options)
-    .toPromise()
+    this.personService.delete(personId)
     .then(res => this.getPeople())
   }
 
   updatePets(personId){
-    let id = "" + personId + "";
-    let headers = new Headers({ 'Content-Type': 'application/json' });
-    let options = new RequestOptions({ headers: headers });
-    return this.http
-    .get('http://localhost:3000/api/Pets?filter={"where":{"ownerId":"' + id + '"}}',options)
-    .toPromise()
-    .then(res => this.updatePet(res.json()))
+    this.petService.updatePets(personId)
+    .then(res => this.updateEachPet(res.json()))
   }
 
-  updatePet(pets){
-    if(pets.length > 0)
-      for(let i = 0; i < pets.length; i++){
-        let headers = new Headers({ 'Content-Type': 'application/json' });
-        let options = new RequestOptions({ headers: headers });
-        return this.http
-        .put('http://localhost:3000/api/Pets/' + pets[i].id ,
-        {
-          ownerId: null
-        },options)
-        .toPromise()
-        .then(res => this.updatePet(res.json()))
-      }
-    }
+  updateEachPet(pets){
+    this.petService.updateEachPet(pets)
+    .then(res => console.log("Pets Updated"))
+  }
 }

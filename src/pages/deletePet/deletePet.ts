@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import 'rxjs/add/operator/toPromise';
-import { Headers, RequestOptions, Http } from '@angular/http';
+import { PetService } from "../services/pet.service";
+
 
 @Component({
   selector: 'page-deletePet',
@@ -12,16 +12,12 @@ export class DeletePetPage {
 
   pets: any;
 
-  constructor(public navCtrl: NavController, public http: Http) {
+  constructor(public navCtrl: NavController, public petService: PetService) {
 
   }
 
   getPets(){
-    let headers = new Headers({ 'Content-Type': 'application/json' });
-    let options = new RequestOptions({ headers: headers });
-    return this.http
-    .get('http://localhost:3000/api/Pets', options)
-    .toPromise()
+    this.petService.getPets()
     .then(res => this.pets = res.json())
   }
 
@@ -30,11 +26,7 @@ export class DeletePetPage {
   }
 
   delete(petId){
-    let headers = new Headers({ 'Content-Type': 'application/json' });
-    let options = new RequestOptions({ headers: headers });
-    return this.http
-    .delete('http://localhost:3000/api/Pets/' + petId, options)
-    .toPromise()
+    this.petService.deletePet(petId)
     .then(res => this.getPets())
   }
 

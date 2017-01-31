@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import 'rxjs/add/operator/toPromise';
-import { Headers, RequestOptions, Http } from '@angular/http';
 import { Validators, FormGroup, FormControl} from '@angular/forms';
+import { PersonService } from "../services/person.service";
 
 
 @Component({
@@ -31,28 +30,25 @@ export class EditPersonPage {
     },
   };
 
-  constructor(public navParm: NavParams, public http: Http) {
+  constructor(public navParm: NavParams, public personService: PersonService) {
 
   }
 
-  getPerson(personId){
-    let headers = new Headers({ 'Content-Type': 'application/json' });
-    let options = new RequestOptions({ headers: headers });
-    return this.http
-    .get('http://localhost:3000/api/People/' + personId, options)
-    .toPromise()
-    .then(res => this.person = res.json())
-  }
+  // getPerson(personId){
+  //   this.personService.getPerson(personId)
+  //   .then(res => this.person = res.json())
+  // }
 
   ionViewWillLoad() {
+    this.person = this.navParm.get("person");
     this.personForm = new FormGroup({
-      name: new FormControl('', Validators.required),
-      lastname: new FormControl('', Validators.required),
-      age: new FormControl('', Validators.required),
-      able: new FormControl(false, Validators.required)
+      name: new FormControl(this.person.name, Validators.required),
+      lastname: new FormControl(this.person.surname, Validators.required),
+      age: new FormControl(this.person.age, Validators.required),
+      able: new FormControl(this.person.enabled, Validators.required)
     });
-    let personId = this.navParm.get("id");
-    this.person = this.getPerson(personId);
+
+    // this.person = this.getPerson(personId);
   }
 
   onValueChanged(data?: any) {
@@ -72,17 +68,9 @@ export class EditPersonPage {
     }
   }
 
-  onSubmit(values): Promise<any>{
-    let headers = new Headers({ 'Content-Type': 'application/json' });
-    let options = new RequestOptions({ headers: headers });
-    return this.http
-    .put('http://localhost:3000/api/People/' + this.person.id, {
-      name: values.name,
-      surname: values.lastname,
-      age: values.age ,
-      enabled: values.able
-      }, options)
-    .toPromise()
+  onSubmit(values){
+    let personId = this.person.id;
+    this.personService.updatePerson(personId, values)
     .then(res => console.log(res))
   }
 }

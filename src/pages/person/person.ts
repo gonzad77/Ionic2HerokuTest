@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import 'rxjs/add/operator/toPromise';
-import { Headers, RequestOptions, Http } from '@angular/http';
 import { Validators, FormGroup, FormControl} from '@angular/forms';
+import { PersonService } from "../services/person.service";
+
 
 @Component({
   selector: 'page-person',
@@ -29,7 +29,7 @@ export class PersonPage {
     },
   };
 
-  constructor(public navCtrl: NavController, public http: Http) {
+  constructor(public navCtrl: NavController, public personService: PersonService) {
 
   }
 
@@ -59,17 +59,8 @@ export class PersonPage {
     }
   }
 
-  onSubmit(values): Promise<any>{
-    let headers = new Headers({ 'Content-Type': 'application/json' });
-    let options = new RequestOptions({ headers: headers });
-    return this.http
-    .post('http://localhost:3000/api/People', {
-      name: values.name,
-      surname: values.lastname,
-      age: values.age ,
-      enabled: values.able
-      }, options)
-    .toPromise()
+  onSubmit(values){
+    this.personService.createPerson(values)
     .then(res => console.log(res))
   }
 

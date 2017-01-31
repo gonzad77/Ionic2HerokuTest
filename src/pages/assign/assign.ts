@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import 'rxjs/add/operator/toPromise';
-import { Headers, RequestOptions, Http } from '@angular/http';
 import { AssignPetPage } from '../assignPet/assignPet';
+import { PersonService } from "../services/person.service";
+
 
 
 @Component({
@@ -13,16 +13,12 @@ import { AssignPetPage } from '../assignPet/assignPet';
 export class AssignPage {
   people: any;
 
-  constructor(public navCtrl: NavController, public http: Http) {
+  constructor(public navCtrl: NavController, public personService: PersonService) {
 
   }
 
   ionViewWillLoad() {
-    let headers = new Headers({ 'Content-Type': 'application/json' });
-    let options = new RequestOptions({ headers: headers });
-    return this.http
-    .get('http://localhost:3000/api/People?filter={"where":{"enabled":true}}', options)
-    .toPromise()
+    this.personService.getEnablePeaple()
     .then(res => this.people = res.json())
   }
 

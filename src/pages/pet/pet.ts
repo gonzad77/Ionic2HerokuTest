@@ -1,8 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
-import 'rxjs/add/operator/toPromise';
-import { Headers, RequestOptions, Http } from '@angular/http';
 import { Validators, FormGroup, FormControl} from '@angular/forms';
+import { PetService } from "../services/pet.service";
 
 @Component({
   selector: 'page-pet',
@@ -25,7 +24,7 @@ export class PetPage {
     }
   };
 
-  constructor(public navCtrl: NavController, public http: Http) {
+  constructor(public navCtrl: NavController, public petService: PetService) {
 
   }
 
@@ -53,15 +52,8 @@ export class PetPage {
     }
   }
 
-  onSubmit(values): Promise<any>{
-    let headers = new Headers({ 'Content-Type': 'application/json' });
-    let options = new RequestOptions({ headers: headers });
-    return this.http
-    .post('http://localhost:3000/api/Pets', {
-      name: values.name,
-      animal: values.animal
-      }, options)
-    .toPromise()
+  onSubmit(values){
+    this.petService.createPet(values)
     .then(res => console.log(res))
   }
 

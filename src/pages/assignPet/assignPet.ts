@@ -1,7 +1,6 @@
 import { Component } from '@angular/core';
 import { NavParams } from 'ionic-angular';
-import 'rxjs/add/operator/toPromise';
-import { Headers, RequestOptions, Http } from '@angular/http';
+import { PetService } from "../services/pet.service";
 
 @Component({
   selector: 'page-assignPet',
@@ -12,28 +11,18 @@ export class AssignPetPage {
 
   pets: any;
 
-  constructor(public navParams: NavParams, public http: Http) {
+  constructor(public navParams: NavParams, public petService: PetService) {
 
   }
 
   ionViewWillLoad() {
-    let headers = new Headers({ 'Content-Type': 'application/json' });
-    let options = new RequestOptions({ headers: headers });
-    return this.http
-    .get('http://localhost:3000/api/Pets?filter={"where": {"or":[{"ownerId":{"exists": false}},{"ownerId":null}]}}', options)
-    .toPromise()
+    this.petService.getNotAssignedPets()
     .then(res => this.pets = res.json())
   }
 
   assign(petId){
     let personId = this.navParams.get('id');
-    let headers = new Headers({ 'Content-Type': 'application/json' });
-    let options = new RequestOptions({ headers: headers });
-    return this.http
-    .put('http://localhost:3000/api/Pets/' + petId,{
-      ownerId: personId
-    } ,options)
-    .toPromise()
+    this.petService.assignPet(petId, personId)
     .then(res => console.log(res))
   }
 }

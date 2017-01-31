@@ -1,8 +1,8 @@
 import { Component } from '@angular/core';
 import { NavController, NavParams } from 'ionic-angular';
-import 'rxjs/add/operator/toPromise';
-import { Headers, RequestOptions, Http } from '@angular/http';
 import { Validators, FormGroup, FormControl} from '@angular/forms';
+import { PetService } from "../services/pet.service";
+
 
 @Component({
   selector: 'page-editPet',
@@ -26,26 +26,23 @@ export class EditPetPage {
     }
   };
 
-  constructor(public navParm: NavParams, public http: Http) {
+  constructor(public navParm: NavParams, public petService: PetService) {
 
   }
 
-  getPet(petId): Promise<any>{
-    let headers = new Headers({ 'Content-Type': 'application/json' });
-    let options = new RequestOptions({ headers: headers });
-    return this.http
-    .get('http://localhost:3000/api/Pets/' + petId, options)
-    .toPromise()
-    .then(res => this.pet = res.json())
-  }
+  // getPet(petId){
+  //   this.petService.getPet(petId)
+  //   .then(res => this.pet = res.json())
+  // }
 
   ionViewWillLoad() {
+    this.pet = this.navParm.get("pet");
     this.petForm = new FormGroup({
-      name: new FormControl('', Validators.required),
-      animal: new FormControl('', Validators.required)
+      name: new FormControl(this.pet.name, Validators.required),
+      animal: new FormControl(this.pet.animal, Validators.required)
     });
-    let petId = this.navParm.get("id");
-    this.getPet(petId);
+
+    // this.getPet(pet.id);
   }
 
   onValueChanged(data?: any) {
@@ -65,15 +62,9 @@ export class EditPetPage {
     }
   }
 
-  onSubmit(values): Promise<any>{
-    let headers = new Headers({ 'Content-Type': 'application/json' });
-    let options = new RequestOptions({ headers: headers });
-    return this.http
-    .put('http://localhost:3000/api/Pets/' + this.pet.id, {
-      name: values.name,
-      animal: values.animal
-      }, options)
-    .toPromise()
+  onSubmit(values){
+    let petId = this.pet.id;
+    this.petService.updatePet(petId, values)
     .then(res => console.log(res))
   }
 }
