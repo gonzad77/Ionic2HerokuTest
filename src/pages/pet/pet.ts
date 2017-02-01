@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, ToastController } from 'ionic-angular';
 import { Validators, FormGroup, FormControl} from '@angular/forms';
 import { PetService } from "../services/pet.service";
+import { AnimalsPage } from "../animals/animals"
 
 @Component({
   selector: 'page-pet',
@@ -24,9 +25,11 @@ export class PetPage {
     }
   };
 
-  constructor(public navCtrl: NavController, public petService: PetService) {
-
-  }
+  constructor(
+    public navCtrl: NavController,
+    public petService: PetService,
+    public toastCtrl: ToastController
+  ){}
 
   ionViewWillLoad() {
     this.petForm = new FormGroup({
@@ -52,9 +55,19 @@ export class PetPage {
     }
   }
 
+  cancel(){
+    this.navCtrl.push(AnimalsPage);
+  }
+
   onSubmit(values){
+    let toast = this.toastCtrl.create({
+                  message: 'Pet was created',
+                  duration: 3000
+                });
     this.petService.createPet(values)
-    .then(res => console.log(res))
+    .then(res => {toast.present();
+                  this.navCtrl.push(AnimalsPage);
+                })
   }
 
 }

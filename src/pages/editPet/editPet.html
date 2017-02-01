@@ -1,7 +1,9 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>Edit Pet</ion-title>
-  </ion-navbar>
+  <ion-toolbar color="primary">
+    <ion-title>
+      Edit Pet
+    </ion-title>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content padding class="form-control">
@@ -27,7 +29,18 @@
        <p class="alert">{{ errors }}<p>
      </div>
     </div>
-    <button ion-button full type="submit" [disabled]="!petForm.valid">Update</button>
+
+    <ion-grid>
+      <ion-row>
+        <ion-col width-50>
+          <button ion-button full type="submit" [disabled]="!petForm.valid">Update</button>
+        </ion-col>
+        <ion-col width-50>
+          <button ion-button full type="button"(click)="cancel()">Cancel</button>
+        </ion-col>
+      </ion-row>
+    </ion-grid>
+    
   </form>
 
 </ion-content>

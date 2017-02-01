@@ -1,7 +1,9 @@
 <ion-header>
-  <ion-navbar>
-    <ion-title>Edit Person</ion-title>
-  </ion-navbar>
+  <ion-toolbar color="primary">
+    <ion-title>
+      Edit Person
+    </ion-title>
+  </ion-toolbar>
 </ion-header>
 
 <ion-content padding class="form-control">
@@ -43,7 +45,16 @@
      <ion-checkbox color="primary" formControlName="able"></ion-checkbox>
    </ion-item>
 
-   <button ion-button full type="submit" [disabled]="!personForm.valid">Update</button>
+   <ion-grid>
+     <ion-row>
+       <ion-col width-50>
+         <button ion-button full type="submit" [disabled]="!personForm.valid">Update</button>
+       </ion-col>
+       <ion-col width-50>
+         <button ion-button full type="button"(click)="cancel()">Cancel</button>
+       </ion-col>
+     </ion-row>
+   </ion-grid>
 
  </form>
 

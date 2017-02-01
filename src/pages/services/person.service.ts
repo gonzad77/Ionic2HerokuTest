@@ -25,7 +25,7 @@ export class PersonService {
     .toPromise()
   }
 
-  delete(personId){
+  deletePerson(personId){
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
     return this.http
@@ -33,7 +33,7 @@ export class PersonService {
     .toPromise()
   }
 
-  getEnablePeaple(){
+  getEnablePeople(){
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
     return this.http

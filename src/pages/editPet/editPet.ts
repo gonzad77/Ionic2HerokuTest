@@ -1,7 +1,8 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, ToastController } from 'ionic-angular';
 import { Validators, FormGroup, FormControl} from '@angular/forms';
 import { PetService } from "../services/pet.service";
+import { AnimalsPage } from "../animals/animals";
 
 
 @Component({
@@ -26,7 +27,11 @@ export class EditPetPage {
     }
   };
 
-  constructor(public navParm: NavParams, public petService: PetService) {
+  constructor(
+    public navParm: NavParams,
+    public navCtrl: NavController,
+    public petService: PetService,
+    public toastCtrl: ToastController) {
 
   }
 
@@ -62,9 +67,19 @@ export class EditPetPage {
     }
   }
 
+  cancel(){
+    this.navCtrl.push(AnimalsPage);
+  }
+
   onSubmit(values){
+    let toast = this.toastCtrl.create({
+                  message: 'Pet was edited',
+                  duration: 3000
+                });
     let petId = this.pet.id;
     this.petService.updatePet(petId, values)
-    .then(res => console.log(res))
+    .then(res => {toast.present();
+                  this.navCtrl.push(AnimalsPage);
+                })
   }
 }

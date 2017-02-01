@@ -1,22 +1,29 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
+import { EditPersonPage } from '../editPerson/editPerson';
+import { PersonPage } from '../person/person';
 import { PersonService } from "../services/person.service";
 import { PetService } from "../services/pet.service";
 
+
+
+
 @Component({
-  selector: 'page-deletePerson',
-  templateUrl: 'deletePerson.html'
+  selector: 'page-people',
+  templateUrl: 'people.html'
 })
 
-export class DeletePersonPage {
-
+export class PeoplePage {
   people: any;
 
   constructor(
     public navCtrl: NavController,
     public personService: PersonService,
-    public petService: PetService) {
+    public petService: PetService
+  ){}
 
+  create(){
+    this.navCtrl.push(PersonPage);
   }
 
   getPeople(){
@@ -28,19 +35,25 @@ export class DeletePersonPage {
     this.getPeople();
   }
 
+  update(person){
+    this.navCtrl.push(EditPersonPage,{person: person});
+  }
+
   delete(personId){
     this.updatePets(personId);
-    this.personService.delete(personId)
+    this.personService.deletePerson(personId)
     .then(res => this.getPeople())
   }
 
   updatePets(personId){
     this.petService.updatePets(personId)
-    .then(res => this.updateEachPet(res.json()))
+    .then(res => {console.log(res.json)
+      // this.updateEachPet(res.json())
+    })
   }
 
-  updateEachPet(pets){
-    this.petService.updateEachPet(pets)
-    .then(res => console.log("Pets Updated"))
-  }
+  // updateEachPet(pets){
+  //   this.petService.updateEachPet(pets)
+  //   .then(res => console.log("Pets Updated"))
+  // }
 }

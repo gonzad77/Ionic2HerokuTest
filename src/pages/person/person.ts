@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, ToastController } from 'ionic-angular';
 import { Validators, FormGroup, FormControl} from '@angular/forms';
 import { PersonService } from "../services/person.service";
+import { PeoplePage } from '../people/people';
+
 
 
 @Component({
@@ -29,9 +31,11 @@ export class PersonPage {
     },
   };
 
-  constructor(public navCtrl: NavController, public personService: PersonService) {
-
-  }
+  constructor(
+    public navCtrl: NavController,
+    public personService: PersonService,
+    public toastCtrl: ToastController
+  ){}
 
   ionViewWillLoad() {
     this.personForm = new FormGroup({
@@ -59,9 +63,19 @@ export class PersonPage {
     }
   }
 
+  cancel(){
+    this.navCtrl.push(PeoplePage);
+  }
+
   onSubmit(values){
+    let toast = this.toastCtrl.create({
+                  message: 'Person was created',
+                  duration: 3000
+                });
     this.personService.createPerson(values)
-    .then(res => console.log(res))
+    .then(res => {toast.present();
+                 this.navCtrl.push(PeoplePage);
+                })
   }
 
 }

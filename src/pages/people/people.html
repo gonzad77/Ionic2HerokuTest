@@ -1,0 +1,33 @@
+<ion-header>
+  <ion-toolbar color="primary">
+    <ion-title>
+      People
+    </ion-title>
+    <ion-buttons end>
+      <button ion-button icon-only color="royal" (click)="create()">
+        <ion-icon name="add-circle"></ion-icon>
+      </button>
+    </ion-buttons>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content padding>
+
+  <ion-grid>
+    <ion-row>
+      <ion-col width-25>name</ion-col>
+      <ion-col width-25>surname</ion-col>
+    </ion-row>
+    <ion-row *ngFor="let person of people">
+      <ion-col width-25>{{person.name}}</ion-col>
+      <ion-col width-25>{{person.surname}}</ion-col>
+      <ion-col width-25>
+        <a (click)="update(person)">update</a>
+      </ion-col>
+      <ion-col width-25>
+        <a (click)="delete(person.id)">delete</a>
+      </ion-col>
+    </ion-row>
+  </ion-grid>
+
+</ion-content>

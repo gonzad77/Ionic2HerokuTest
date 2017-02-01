@@ -1,17 +1,15 @@
 import { NgModule, ErrorHandler } from '@angular/core';
 import { IonicApp, IonicModule, IonicErrorHandler } from 'ionic-angular';
 import { MyApp } from './app.component';
-import { HomePage } from '../pages/home/home';
+import { TabsNavigationPage } from '../pages/tabs-navigation/tabs-navigation';
 import { AssignPage } from '../pages/assign/assign';
 import { PetPage } from '../pages/pet/pet';
 import { PersonPage } from '../pages/person/person';
-import { DeletePersonPage } from '../pages/deletePerson/deletePerson';
-import { DeletePetPage } from '../pages/deletePet/deletePet';
-import { UpdatePetPage } from '../pages/updatePet/updatePet';
-import { UpdatePersonPage } from '../pages/updatePerson/updatePerson';
 import { EditPetPage } from '../pages/editPet/editPet';
 import { EditPersonPage } from '../pages/editPerson/editPerson';
 import { AssignPetPage } from '../pages/assignPet/assignPet';
+import { PeoplePage } from '../pages/people/people';
+import { AnimalsPage } from '../pages/animals/animals';
 import { PersonService } from '../pages/services/person.service';
 import { PetService } from '../pages/services/pet.service';
 
@@ -22,17 +20,15 @@ import { PetService } from '../pages/services/pet.service';
 @NgModule({
   declarations: [
     MyApp,
-    HomePage,
+    TabsNavigationPage,
     PersonPage,
     PetPage,
     AssignPage,
-    DeletePetPage,
-    DeletePersonPage,
-    UpdatePetPage,
-    UpdatePersonPage,
     EditPetPage,
     EditPersonPage,
-    AssignPetPage
+    AssignPetPage,
+    PeoplePage,
+    AnimalsPage
   ],
   imports: [
     IonicModule.forRoot(MyApp)
@@ -40,17 +36,15 @@ import { PetService } from '../pages/services/pet.service';
   bootstrap: [IonicApp],
   entryComponents: [
     MyApp,
-    HomePage,
+    TabsNavigationPage,
     PersonPage,
     PetPage,
     AssignPage,
-    DeletePetPage,
-    DeletePersonPage,
-    UpdatePetPage,
-    UpdatePersonPage,
     EditPetPage,
     EditPersonPage,
-    AssignPetPage
+    AssignPetPage,
+    PeoplePage,
+    AnimalsPage
   ],
   providers: [PetService, PersonService]
 })

@@ -1,7 +1,9 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, ToastController } from 'ionic-angular';
 import { Validators, FormGroup, FormControl} from '@angular/forms';
 import { PersonService } from "../services/person.service";
+import { PeoplePage } from "../people/people";
+
 
 
 @Component({
@@ -30,7 +32,11 @@ export class EditPersonPage {
     },
   };
 
-  constructor(public navParm: NavParams, public personService: PersonService) {
+  constructor(
+    public navParm: NavParams,
+    public navCtrl: NavController,
+    public personService: PersonService,
+    public toastCtrl: ToastController) {
 
   }
 
@@ -68,9 +74,19 @@ export class EditPersonPage {
     }
   }
 
+  cancel(){
+    this.navCtrl.push(PeoplePage);
+  }
+
   onSubmit(values){
+    let toast = this.toastCtrl.create({
+                  message: 'Person was edited',
+                  duration: 3000
+                });
     let personId = this.person.id;
     this.personService.updatePerson(personId, values)
-    .then(res => console.log(res))
+    .then(res => {toast.present();
+                  this.navCtrl.push(PeoplePage);
+                })
   }
 }

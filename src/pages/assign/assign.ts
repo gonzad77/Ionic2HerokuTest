@@ -17,8 +17,8 @@ export class AssignPage {
 
   }
 
-  ionViewWillLoad() {
-    this.personService.getEnablePeaple()
+  ionViewDidEnter(){
+    this.personService.getEnablePeople()
     .then(res => this.people = res.json())
   }
 

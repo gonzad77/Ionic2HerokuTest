@@ -49,24 +49,27 @@ export class PetService {
     let headers = new Headers({ 'Content-Type': 'application/json' });
     let options = new RequestOptions({ headers: headers });
     return this.http
-    .get('http://localhost:3000/api/Pets?filter={"where":{"ownerId":"' + id + '"}}',options)
+    .post('http://localhost:3000/api/Pets/update?where[ownerId]=' + id,
+    {
+      ownerId: null
+    },options)
     .toPromise()
   }
 
-  updateEachPet(pets){
-    if(pets.length > 0){
-      for(let i = 0; i < pets.length; i++){
-        let headers = new Headers({ 'Content-Type': 'application/json' });
-        let options = new RequestOptions({ headers: headers });
-        return this.http
-        .put('http://localhost:3000/api/Pets/' + pets[i].id ,
-        {
-          ownerId: null
-        },options)
-        .toPromise()
-      }
-    }
-  }
+  // updateEachPet(pets){
+  //   if(pets.length > 0){
+  //     for(let i = 0; i < pets.length; i++){
+  //       let headers = new Headers({ 'Content-Type': 'application/json' });
+  //       let options = new RequestOptions({ headers: headers });
+  //       return this.http
+  //       .put('http://localhost:3000/api/Pets/' + pets[i].id ,
+  //       {
+  //         ownerId: null
+  //       },options)
+  //       .toPromise()
+  //     }
+  //   }
+  // }
 
   getNotAssignedPets(){
     let headers = new Headers({ 'Content-Type': 'application/json' });
