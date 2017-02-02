@@ -1,7 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { EditPersonPage } from '../editPerson/editPerson';
-import { PersonPage } from '../person/person';
+import { PersonPage } from '../createPerson/createPerson';
 import { PersonService } from "../services/person.service";
 import { PetService } from "../services/pet.service";
 
@@ -14,7 +14,7 @@ import { PetService } from "../services/pet.service";
 })
 
 export class PeoplePage {
-  people: any;
+  people: Array<any> = [];
 
   constructor(
     public navCtrl: NavController,
@@ -48,12 +48,6 @@ export class PeoplePage {
   updatePets(personId){
     this.petService.updatePets(personId)
     .then(res => {console.log(res.json)
-      // this.updateEachPet(res.json())
     })
   }
-
-  // updateEachPet(pets){
-  //   this.petService.updateEachPet(pets)
-  //   .then(res => console.log("Pets Updated"))
-  // }
 }

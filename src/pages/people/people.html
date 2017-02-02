@@ -13,21 +13,27 @@
 
 <ion-content padding>
 
-  <ion-grid>
-    <ion-row>
+  <ion-grid *ngIf="people.length > 0">
+    <ion-row class="row-title">
       <ion-col width-25>name</ion-col>
       <ion-col width-25>surname</ion-col>
     </ion-row>
     <ion-row *ngFor="let person of people">
-      <ion-col width-25>{{person.name}}</ion-col>
-      <ion-col width-25>{{person.surname}}</ion-col>
-      <ion-col width-25>
-        <a (click)="update(person)">update</a>
+      <ion-col width-25 class="table-center">{{person.name}}</ion-col>
+      <ion-col width-25 class="table-center">{{person.surname}}</ion-col>
+      <ion-col width-25 class="table-center">
+        <button ion-button icon-only small color="royal" (click)="update(person)">
+          <ion-icon class="table-icons" name="create"></ion-icon>
+        </button>
       </ion-col>
-      <ion-col width-25>
-        <a (click)="delete(person.id)">delete</a>
+      <ion-col width-25 class="table-center">
+        <button ion-button icon-only small color="royal" (click)="delete(person.id)">
+          <ion-icon class="table-icons "name="trash"></ion-icon>
+        </button>
       </ion-col>
     </ion-row>
   </ion-grid>
+
+  <div *ngIf="people.length == 0"> There is not people </div>
 
 </ion-content>

@@ -10,7 +10,7 @@ import { AssignPage } from '../assign/assign';
 
 export class AssignPetPage {
 
-  pets: any;
+  pets: Array<any> = [];
 
   constructor(
     public navParams: NavParams,
@@ -20,9 +20,12 @@ export class AssignPetPage {
   ){}
 
   ionViewWillLoad() {
-    debugger
     this.petService.getNotAssignedPets()
     .then(res => this.pets = res.json())
+  }
+
+  back(){
+    this.navCtrl.push(AssignPage);
   }
 
   assign(petId){

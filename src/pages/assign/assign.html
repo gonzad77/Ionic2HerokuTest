@@ -1,23 +1,26 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-title>
-      Assign
+      Adopt
     </ion-title>
   </ion-toolbar>
 </ion-header>
 <ion-content padding>
-  <ion-grid>
-    <ion-row>
-      <ion-col width-33>name</ion-col>
-      <ion-col width-33>surname</ion-col>
-      <ion-col width-33>action</ion-col>
+  <ion-grid *ngIf="people.length > 0">
+    <ion-row class="row-title">
+      <ion-col width-25>name</ion-col>
+      <ion-col width-25>surname</ion-col>
     </ion-row>
     <ion-row *ngFor="let person of people">
-      <ion-col width-33>{{person.name}}</ion-col>
-      <ion-col width-33>{{person.surname}}</ion-col>
-      <ion-col width-33>
-        <a (click)="assign(person.id)">assign pet</a>
+      <ion-col width-25>{{person.name}}</ion-col>
+      <ion-col width-25>{{person.surname}}</ion-col>
+      <ion-col width-25>
+        <a (click)="assign(person.id)">adopt pet</a>
+      </ion-col>
+      <ion-col width-25>
+        <a (click)="consultPets(person.id)">my pets</a>
       </ion-col>
     </ion-row>
   </ion-grid>
+  <div *ngIf="people.length == 0"> There is not people </div>
 </ion-content>

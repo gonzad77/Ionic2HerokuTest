@@ -1,6 +1,7 @@
 import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { AssignPetPage } from '../assignPet/assignPet';
+import { MyPetsPage } from '../myPets/myPets'
 import { PersonService } from "../services/person.service";
 
 
@@ -11,7 +12,7 @@ import { PersonService } from "../services/person.service";
 })
 
 export class AssignPage {
-  people: any;
+  people: Array<any> = [];
 
   constructor(public navCtrl: NavController, public personService: PersonService) {
 
@@ -24,5 +25,9 @@ export class AssignPage {
 
   assign(personId){
     this.navCtrl.push(AssignPetPage,{id: personId});
+  }
+
+  consultPets(personId){
+    this.navCtrl.push(MyPetsPage, {id: personId});
   }
 }

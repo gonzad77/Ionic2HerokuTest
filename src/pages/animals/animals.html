@@ -13,21 +13,27 @@
 
 <ion-content padding>
 
-  <ion-grid>
-    <ion-row>
+  <ion-grid *ngIf="pets.length > 0">
+    <ion-row class="row-title">
       <ion-col width-25>animal</ion-col>
       <ion-col width-25>name</ion-col>
     </ion-row>
     <ion-row *ngFor="let pet of pets">
-      <ion-col width-25>{{pet.animal}}</ion-col>
-      <ion-col width-25>{{pet.name}}</ion-col>
-      <ion-col width-25>
-        <a (click)="update(pet)">update</a>
+      <ion-col width-25 class="table-center">{{pet.animal}}</ion-col>
+      <ion-col width-25 class="table-center">{{pet.name}}</ion-col>
+      <ion-col width-25 class="table-center">
+        <button ion-button icon-only small color="royal" (click)="update(pet)">
+          <ion-icon class="table-icons" name="create"></ion-icon>
+        </button>
       </ion-col>
-      <ion-col width-25>
-        <a (click)="delete(pet.id)">delete</a>
+      <ion-col width-25 class="table-center">
+        <button ion-button icon-only small color="royal" (click)="delete(pet.id)">
+          <ion-icon class="table-icons "name="trash"></ion-icon>
+        </button>
       </ion-col>
     </ion-row>
   </ion-grid>
+
+  <div *ngIf="pets.length == 0"> There is not pets </div>
 
 </ion-content>

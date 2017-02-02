@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-title>
-      Adopt Pet
+      Animals
     </ion-title>
     <ion-buttons end>
       <button ion-button icon-only color="royal" (click)="back()">
@@ -19,13 +19,14 @@
       <ion-col width-33>name</ion-col>
     </ion-row>
     <ion-row *ngFor="let pet of pets">
-      <ion-col width-33>{{pet.animal}}</ion-col>
-      <ion-col width-33>{{pet.name}}</ion-col>
+      <ion-col width-33 class="table-center">{{pet.animal}}</ion-col>
+      <ion-col width-33 class="table-center">{{pet.name}}</ion-col>
       <ion-col width-33>
-        <a (click)="assign(pet.id)">assign</a>
+        <a (click)="setFree(pet.id)">set free</a>
       </ion-col>
     </ion-row>
   </ion-grid>
+
   <div *ngIf="pets.length == 0"> There is not pets </div>
 
 </ion-content>

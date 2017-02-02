@@ -1,58 +1,50 @@
 import { Component } from '@angular/core';
 import { NavController, ToastController } from 'ionic-angular';
 import { Validators, FormGroup, FormControl} from '@angular/forms';
-import { PersonService } from "../services/person.service";
-import { PeoplePage } from '../people/people';
-
-
+import { PetService } from "../services/pet.service";
+import { AnimalsPage } from "../animals/animals"
 
 @Component({
-  selector: 'page-person',
-  templateUrl: 'person.html'
+  selector: 'page-create-pet',
+  templateUrl: 'createPet.html'
 })
 
-export class PersonPage {
+export class PetPage {
 
-  personForm: FormGroup;
+  petForm: FormGroup;
   formErrors = {
     'name': [],
-    'lastname': [],
-    'age': []
+    'animal': []
   };
   validationMessages = {
     'name': {
       'required':      'Name is required.'
     },
-    'lastname': {
-      'required':      'Last name is required'
-    },
-    'age': {
-      'required':      'Age is required'
-    },
+    'animal': {
+      'required':      'Animal is required'
+    }
   };
 
   constructor(
     public navCtrl: NavController,
-    public personService: PersonService,
+    public petService: PetService,
     public toastCtrl: ToastController
   ){}
 
   ionViewWillLoad() {
-    this.personForm = new FormGroup({
+    this.petForm = new FormGroup({
       name: new FormControl('', Validators.required),
-      lastname: new FormControl('', Validators.required),
-      age: new FormControl('', Validators.required),
-      able: new FormControl(false, Validators.required)
+      animal: new FormControl('', Validators.required)
     });
   }
 
   onValueChanged(data?: any) {
-  if (!this.personForm) { return; }
-    const form = this.personForm;
+  if (!this.petForm) { return; }
+    const form = this.petForm;
     for (const field in this.formErrors) {
       // clear previous error message
       this.formErrors[field] = [];
-      this.personForm[field] = '';
+      this.petForm[field] = '';
       const control = form.get(field);
       if (control && control.dirty && !control.valid) {
         const messages = this.validationMessages[field];
@@ -64,17 +56,17 @@ export class PersonPage {
   }
 
   cancel(){
-    this.navCtrl.push(PeoplePage);
+    this.navCtrl.push(AnimalsPage);
   }
 
   onSubmit(values){
     let toast = this.toastCtrl.create({
-                  message: 'Person was created',
+                  message: 'Pet was created',
                   duration: 3000
                 });
-    this.personService.createPerson(values)
+    this.petService.createPet(values)
     .then(res => {toast.present();
-                 this.navCtrl.push(PeoplePage);
+                  this.navCtrl.push(AnimalsPage);
                 })
   }
 

@@ -2,7 +2,7 @@ import { Component } from '@angular/core';
 import { NavController } from 'ionic-angular';
 import { PetService } from "../services/pet.service";
 import { EditPetPage } from '../editPet/editPet';
-import { PetPage } from '../pet/pet';
+import { PetPage } from '../createPet/createPet';
 
 
 
@@ -12,7 +12,7 @@ import { PetPage } from '../pet/pet';
 })
 
 export class AnimalsPage {
-  pets: any;
+  pets: Array<any> = [];
 
   constructor(public navCtrl: NavController, public petService: PetService) {
 
