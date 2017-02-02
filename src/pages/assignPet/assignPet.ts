@@ -30,8 +30,9 @@ export class AssignPetPage {
 
   assign(petId){
     let toast = this.toastCtrl.create({
-                  message: 'Pet was assigned',
-                  duration: 3000
+                  message: 'Congratulations! You adopted a Pet',
+                  duration: 2000,
+                  position: 'top'
                 });
     let personId = this.navParams.get('id');
     this.petService.assignPet(petId, personId)

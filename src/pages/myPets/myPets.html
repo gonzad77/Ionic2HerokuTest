@@ -22,11 +22,11 @@
       <ion-col width-33 class="table-center">{{pet.animal}}</ion-col>
       <ion-col width-33 class="table-center">{{pet.name}}</ion-col>
       <ion-col width-33>
-        <a (click)="setFree(pet.id)">set free</a>
+        <a (click)="setFree(pet.id)">Set free</a>
       </ion-col>
     </ion-row>
   </ion-grid>
 
-  <div *ngIf="pets.length == 0"> There is not pets </div>
+  <div *ngIf="pets.length == 0"> There are not pets </div>
 
 </ion-content>

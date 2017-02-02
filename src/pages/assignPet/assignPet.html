@@ -22,10 +22,10 @@
       <ion-col width-33>{{pet.animal}}</ion-col>
       <ion-col width-33>{{pet.name}}</ion-col>
       <ion-col width-33>
-        <a (click)="assign(pet.id)">assign</a>
+        <a (click)="assign(pet.id)">Adopt</a>
       </ion-col>
     </ion-row>
   </ion-grid>
-  <div *ngIf="pets.length == 0"> There is not pets </div>
+  <div *ngIf="pets.length == 0"> There are not pets</div>
 
 </ion-content>

@@ -1,7 +1,7 @@
 <ion-header>
   <ion-toolbar color="primary">
     <ion-title>
-      Adopt
+      Adopt a Pet
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -15,10 +15,10 @@
       <ion-col width-25>{{person.name}}</ion-col>
       <ion-col width-25>{{person.surname}}</ion-col>
       <ion-col width-25>
-        <a (click)="assign(person.id)">adopt pet</a>
+        <a (click)="assign(person.id)">Adopt pet</a>
       </ion-col>
       <ion-col width-25>
-        <a (click)="consultPets(person.id)">my pets</a>
+        <a (click)="consultPets(person.id)">My pets</a>
       </ion-col>
     </ion-row>
   </ion-grid>

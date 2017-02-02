@@ -1,106 +1,85 @@
 import {Injectable} from "@angular/core";
 import 'rxjs/add/operator/toPromise';
 import { Headers, RequestOptions, Http } from '@angular/http';
+const API_URL = "http://localhost:3000/api/";
 
 @Injectable()
 export class PetService {
 
-  constructor(public http: Http) {
-
-  }
+  constructor(public http: Http) {}
 
   getPets(){
-    let headers = new Headers({ 'Content-Type': 'application/json' });
-    let options = new RequestOptions({ headers: headers });
     return this.http
-    .get('http://localhost:3000/api/Pets', options)
+    .get(API_URL + 'Pets')
     .toPromise()
   }
 
   getPet(petId){
-    let headers = new Headers({ 'Content-Type': 'application/json' });
-    let options = new RequestOptions({ headers: headers });
     return this.http
-    .get('http://localhost:3000/api/Pets/' + petId, options)
+    .get(API_URL + 'Pets/' + petId)
     .toPromise()
   }
 
   getPetsByOwner(ownerId){
-    let headers = new Headers({ 'Content-Type': 'application/json' });
-    let options = new RequestOptions({ headers: headers });
     return this.http
-    .get('http://localhost:3000/api/Pets/?filter={"where":{"ownerId":"'+ ownerId + '"}}', options)
+    .get(API_URL + 'Pets/?filter={"where":{"ownerId":"'+ ownerId + '"}}')
     .toPromise()
   }
 
   deletePet(petId){
-    let headers = new Headers({ 'Content-Type': 'application/json' });
-    let options = new RequestOptions({ headers: headers });
     return this.http
-    .delete('http://localhost:3000/api/Pets/' + petId, options)
+    .delete(API_URL + 'Pets/' + petId)
     .toPromise()
   }
 
   updatePet(petId, values){
-    let headers = new Headers({ 'Content-Type': 'application/json' });
-    let options = new RequestOptions({ headers: headers });
     return this.http
-    .put('http://localhost:3000/api/Pets/' + petId, {
+    .put(API_URL + 'Pets/' + petId, {
       name: values.name,
       animal: values.animal
-      }, options)
+      })
     .toPromise()
   }
 
   updatePets(personId){
     let id = "" + personId + "";
-    let headers = new Headers({ 'Content-Type': 'application/json' });
-    let options = new RequestOptions({ headers: headers });
     return this.http
-    .post('http://localhost:3000/api/Pets/update?where[ownerId]=' + id,
+    .post(API_URL + 'Pets/update?where[ownerId]=' + id,
     {
       ownerId: null
-    },options)
+    })
     .toPromise()
   }
 
 
   getNotAssignedPets(){
-    let headers = new Headers({ 'Content-Type': 'application/json' });
-    let options = new RequestOptions({ headers: headers });
     return this.http
-    .get('http://localhost:3000/api/Pets?filter={"where": {"or":[{"ownerId":{"exists": false}},{"ownerId":null}]}}', options)
+    .get(API_URL + 'Pets?filter={"where": {"or":[{"ownerId":{"exists": false}},{"ownerId":null}]}}')
     .toPromise()
   }
 
   assignPet(petId, personId){
-    let headers = new Headers({ 'Content-Type': 'application/json' });
-    let options = new RequestOptions({ headers: headers });
     return this.http
-    .put('http://localhost:3000/api/Pets/' + petId,{
+    .put(API_URL + 'Pets/' + petId,{
       ownerId: personId
-    } ,options)
+    })
     .toPromise()
   }
 
   createPet(values){
-    let headers = new Headers({ 'Content-Type': 'application/json' });
-    let options = new RequestOptions({ headers: headers });
     return this.http
-    .post('http://localhost:3000/api/Pets', {
+    .post(API_URL + 'Pets', {
       name: values.name,
       animal: values.animal
-      }, options)
+      })
     .toPromise()
   }
 
   setOwnerNull(petId){
-    let headers = new Headers({ 'Content-Type': 'application/json' });
-    let options = new RequestOptions({ headers: headers });
     return this.http
-    .put('http://localhost:3000/api/Pets/' + petId,{
+    .put(API_URL + 'Pets/' + petId,{
       ownerId: null
-    } ,options)
+    })
     .toPromise()
   }
 }

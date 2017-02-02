@@ -62,7 +62,8 @@ export class PetPage {
   onSubmit(values){
     let toast = this.toastCtrl.create({
                   message: 'Pet was created',
-                  duration: 3000
+                  duration: 2000,
+                  position: 'top'
                 });
     this.petService.createPet(values)
     .then(res => {toast.present();

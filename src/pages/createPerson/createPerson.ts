@@ -70,7 +70,8 @@ export class PersonPage {
   onSubmit(values){
     let toast = this.toastCtrl.create({
                   message: 'Person was created',
-                  duration: 3000
+                  duration: 2000,
+                  position: 'top'
                 });
     this.personService.createPerson(values)
     .then(res => {toast.present();
