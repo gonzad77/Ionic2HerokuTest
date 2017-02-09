@@ -1,6 +1,6 @@
 import {Injectable} from "@angular/core";
 import 'rxjs/add/operator/toPromise';
-import { Headers, RequestOptions, Http } from '@angular/http';
+import { Http } from '@angular/http';
 const API_URL = "http://localhost:3000/api/";
 
 @Injectable()

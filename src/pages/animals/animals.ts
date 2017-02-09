@@ -14,9 +14,10 @@ import { PetPage } from '../createPet/createPet';
 export class AnimalsPage {
   pets: Array<any> = [];
 
-  constructor(public navCtrl: NavController, public petService: PetService) {
-
-  }
+  constructor(
+    public navCtrl: NavController,
+    public petService: PetService
+  ){}
 
   create(){
     this.navCtrl.push(PetPage);

@@ -14,8 +14,8 @@ export class MyPetsPage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    public petService: PetService)
-    {}
+    public petService: PetService
+  ){}
 
   back(){
     this.navCtrl.push(AssignPage);

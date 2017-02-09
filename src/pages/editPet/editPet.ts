@@ -35,19 +35,12 @@ export class EditPetPage {
 
   }
 
-  // getPet(petId){
-  //   this.petService.getPet(petId)
-  //   .then(res => this.pet = res.json())
-  // }
-
   ionViewWillLoad() {
     this.pet = this.navParm.get("pet");
     this.petForm = new FormGroup({
       name: new FormControl(this.pet.name, Validators.required),
       animal: new FormControl(this.pet.animal, Validators.required)
     });
-
-    // this.getPet(pet.id);
   }
 
   onValueChanged(data?: any) {

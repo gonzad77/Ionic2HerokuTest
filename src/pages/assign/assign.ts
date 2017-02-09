@@ -14,9 +14,10 @@ import { PersonService } from "../services/person.service";
 export class AssignPage {
   people: Array<any> = [];
 
-  constructor(public navCtrl: NavController, public personService: PersonService) {
-
-  }
+  constructor(
+    public navCtrl: NavController,
+    public personService: PersonService
+  ){}
 
   ionViewDidEnter(){
     this.personService.getEnablePeople()

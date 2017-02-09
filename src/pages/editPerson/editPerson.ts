@@ -40,11 +40,6 @@ export class EditPersonPage {
 
   }
 
-  // getPerson(personId){
-  //   this.personService.getPerson(personId)
-  //   .then(res => this.person = res.json())
-  // }
-
   ionViewWillLoad() {
     this.person = this.navParm.get("person");
     this.personForm = new FormGroup({
@@ -53,8 +48,6 @@ export class EditPersonPage {
       age: new FormControl(this.person.age, Validators.required),
       able: new FormControl(this.person.enabled, Validators.required)
     });
-
-    // this.person = this.getPerson(personId);
   }
 
   onValueChanged(data?: any) {
