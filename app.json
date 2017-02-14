@@ -3,5 +3,6 @@
         "description": "App Description",
         "repository": "https://github.com/gonzad77/ionic2-loopback-mongo-example-app",
         "logo": "http://pereless360.com/img/SP/Ghost/360-logo-white.png",
-        "keywords": ["ionic2", "heroku"]
+        "keywords": ["ionic2", "heroku"],
+        "addons": ["mongolab"]
     }
