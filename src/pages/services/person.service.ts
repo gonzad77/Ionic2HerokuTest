@@ -1,7 +1,7 @@
 import {Injectable} from "@angular/core";
 import 'rxjs/add/operator/toPromise';
 import { Http } from '@angular/http';
-const API_URL = "http://localhost:3000/api/";
+const API_URL = "https://ionic2-loopback-mongo-api.herokuapp.com/api/";
 
 @Injectable()
 export class PersonService {
