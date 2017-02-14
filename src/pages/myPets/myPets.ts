@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController, NavParams } from 'ionic-angular';
+import { NavController, NavParams, LoadingController } from 'ionic-angular';
 import { PetService } from "../services/pet.service";
 import { AssignPage } from '../assign/assign';
 
@@ -14,7 +14,8 @@ export class MyPetsPage {
   constructor(
     public navCtrl: NavController,
     public navParams: NavParams,
-    public petService: PetService
+    public petService: PetService,
+    public loadingCtrl: LoadingController
   ){}
 
   back(){
@@ -22,12 +23,19 @@ export class MyPetsPage {
   }
 
   getPetsByOwner(){
+
+    let loading = this.loadingCtrl.create({
+      content: 'Please wait...'
+    });
+    loading.present();
+
     let personId = this.navParams.get('id');
     this.petService.getPetsByOwner(personId)
-    .then(res => this.pets = res.json())
+    .then(res => {this.pets = res.json();
+                  loading.dismiss()})
   }
 
-  ionViewDidEnter(){
+  ionViewWillEnter(){
     this.getPetsByOwner();
   }
 

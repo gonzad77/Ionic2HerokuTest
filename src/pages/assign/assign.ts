@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, LoadingController } from 'ionic-angular';
 import { AssignPetPage } from '../assignPet/assignPet';
 import { MyPetsPage } from '../myPets/myPets'
 import { PersonService } from "../services/person.service";
@@ -16,12 +16,21 @@ export class AssignPage {
 
   constructor(
     public navCtrl: NavController,
-    public personService: PersonService
+    public personService: PersonService,
+    public loadingCtrl: LoadingController
   ){}
 
-  ionViewDidEnter(){
+  ionViewWillEnter(){
+    let loading = this.loadingCtrl.create({
+      content: 'Please wait...'
+    });
+    loading.present();
+
     this.personService.getEnablePeople()
-    .then(res => this.people = res.json())
+    .then(res => {
+      this.people = res.json();
+      loading.dismiss()
+    });
   }
 
   assign(personId){

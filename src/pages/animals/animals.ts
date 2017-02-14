@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavController } from 'ionic-angular';
+import { NavController, LoadingController } from 'ionic-angular';
 import { PetService } from "../services/pet.service";
 import { EditPetPage } from '../editPet/editPet';
 import { PetPage } from '../createPet/createPet';
@@ -16,7 +16,8 @@ export class AnimalsPage {
 
   constructor(
     public navCtrl: NavController,
-    public petService: PetService
+    public petService: PetService,
+    public loadingCtrl: LoadingController
   ){}
 
   create(){
@@ -24,11 +25,17 @@ export class AnimalsPage {
   }
 
   getPets(){
+    let loading = this.loadingCtrl.create({
+      content: 'Please wait...'
+    });
+    loading.present();
+
     this.petService.getPets()
-    .then(res => this.pets = res.json())
+    .then(res => {this.pets = res.json();
+                  loading.dismiss()})
   }
 
-  ionViewWillLoad() {
+  ionViewWillEnter() {
     this.getPets();
   }
 

@@ -67,7 +67,8 @@ export class EditPetPage {
   onSubmit(values){
     let toast = this.toastCtrl.create({
                   message: 'Pet was edited',
-                  duration: 3000
+                  duration: 3000,
+                  position: 'top'
                 });
     let petId = this.pet.id;
     this.petService.updatePet(petId, values)

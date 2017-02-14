@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { NavParams, NavController, ToastController } from 'ionic-angular';
+import { NavParams, NavController, ToastController, LoadingController } from 'ionic-angular';
 import { PetService } from "../services/pet.service";
 import { AssignPage } from '../assign/assign';
 
@@ -16,12 +16,19 @@ export class AssignPetPage {
     public navParams: NavParams,
     public navCtrl: NavController,
     public petService: PetService,
-    public toastCtrl: ToastController
+    public toastCtrl: ToastController,
+    public loadingCtrl: LoadingController
   ){}
 
-  ionViewWillLoad() {
+  ionViewWillEnter() {
+    let loading = this.loadingCtrl.create({
+      content: 'Please wait...'
+    });
+    loading.present();
+
     this.petService.getNotAssignedPets()
-    .then(res => this.pets = res.json())
+    .then(res => {this.pets = res.json();
+                  loading.dismiss()})
   }
 
   back(){

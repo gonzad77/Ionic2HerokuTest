@@ -74,7 +74,8 @@ export class EditPersonPage {
   onSubmit(values){
     let toast = this.toastCtrl.create({
                   message: 'Person was edited',
-                  duration: 3000
+                  duration: 3000,
+                  position: 'top'
                 });
     let personId = this.person.id;
     this.personService.updatePerson(personId, values)
